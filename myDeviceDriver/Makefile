@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-2.0
+
 obj-m := mydriver.o
 
 mydriver.ko: mydriver.c
