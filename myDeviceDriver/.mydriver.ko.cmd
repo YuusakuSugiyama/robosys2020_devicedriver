@@ -1,0 +1,1 @@
+cmd_/home/ubuntu/robosys2020_devicedriver/myDeviceDriver/mydriver.ko := ld -r  -EL  -maarch64elf  --build-id  -T ./scripts/module-common.lds -T ./arch/arm64/kernel/module.lds -o /home/ubuntu/robosys2020_devicedriver/myDeviceDriver/mydriver.ko /home/ubuntu/robosys2020_devicedriver/myDeviceDriver/mydriver.o /home/ubuntu/robosys2020_devicedriver/myDeviceDriver/mydriver.mod.o;  true
