@@ -1,3 +1,8 @@
+// SPDX-License-Identifer: GPL-2.0
+/*
+ * Copyright (C) 2020 Hikaru Jitsukawa. All rights reserved.
+ */
+
 #include <linux/cdev.h>
 #include <linux/delay.h>
 #include <linux/device.h>
