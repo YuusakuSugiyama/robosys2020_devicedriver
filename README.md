@@ -94,4 +94,4 @@ youtubeにあげたデモ動画は[こちら](https://youtu.be/zEzk37fNaZQ)。
 
 ---
 # ライセンス
-[GNU Geberal Public License v3.0]https://github.com/zjzj-zz/robosys2020_devicedriver/blob/main/COPYING  
+[GNU Geberal Public License v3.0](https://github.com/zjzj-zz/robosys2020_devicedriver/blob/main/COPYING)  
