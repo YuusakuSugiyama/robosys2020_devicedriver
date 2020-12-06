@@ -34,7 +34,7 @@
 
 #### 実行方法
 ```sh
-$ git clone https://github.com/zjzj-zz/robosys2020_devicedriver
+$ git clone https://github.com/zjzj-zz/robosys2020_devicedriver.git
 $ cd robosys2020_devicedriver/myDeviceDriver
 $ make
 $ sudo insmod mydriver.ko
