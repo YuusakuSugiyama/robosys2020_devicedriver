@@ -3,14 +3,24 @@
 #include <linux/device.h>
 #include <linux/fs.h>
 #include <linux/gpio.h>
+//#include <linux/init.h>
+//#include <linux/interrupt.h>
+//#include <linux/io.h>
+//#include <linux/kernel.h>
 #include <linux/module.h>
+//#include <linux/types.h>
 #include <linux/uaccess.h>
+//#include <asm/current.h>
+//#include <asm/uaccess.h>
+//#include <asm/io.h>
 
 MODULE_AUTHOR("Ryuichi Ueda and Jitsukawa Hikaru");
 MODULE_DESCRIPTION("driver for control LED with button");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("0.0.1");
 
+//#define REG(addr) (*((volatile unsigned int*)(addr)))
+//#define num 2
 #define REG_ADDR_BASE (0xfe000000)
 #define REG_ADDR_GPIO_BASE (REG_ADDR_BASE + 0x00200000)
 #define REG_ADDR_GPIO_REG 0xa0
@@ -44,6 +54,7 @@ static int mydriver_close(struct inode *inode, struct file *file){
 static ssize_t led_write(struct file *filp, const char *buf, size_t count, loff_t *pos){
 	char c;
 	int btn, i;
+	char outValue;
 	printk("led_write");
 	if(copy_from_user(&c, buf, sizeof(char)))
 		return -EFAULT;
@@ -53,38 +64,24 @@ static ssize_t led_write(struct file *filp, const char *buf, size_t count, loff_
 			gpio_direction_input(GPIO_PIN_BTN);
 			btn = gpio_get_value(GPIO_PIN_BTN);
 			printk("button = %d\n", btn);
-			if(btn == 0){
-				for(i = 0; i < 5; i++){
-					gpio_base[7] = 1 << GPIO_PIN_LED;
-					msleep(500);
-					gpio_base[10] = 1 << GPIO_PIN_LED;
-					msleep(500);
-				}
-				c = 'C';
-			} else if(btn == 1) {
-				for(i = 100; i > 1; i -= 5){
-					gpio_base[7] = 1 << GPIO_PIN_LED;
-					msleep(i);
-					gpio_base[10] = 1 << GPIO_PIN_LED;
-					msleep(i);
-				}
+//			if(btn == 0) gpio_set_value(GPIO_PIN_LED, 0);
+			if(btn == 0) gpio_base[7] = 1 << GPIO_PIN_LED;
+			else gpio_base[10] = 1 << GPIO_PIN_LED;
+break;
+		case 'B':
+//			gpio_set_value(GPIO_PIN_LED, 0);
+			get_user(outValue, &buf[0]);
+/*			if(outValue == '1'){
+				gpio_base[7] = 1 << GPIO_PIN_LED;
+			} else {
+				gpio_base[10] = 1 << GPIO_PIN_LED;
+			}*/
+			for(i = 0; i < 5; i++){
 				gpio_base[7] = 1 << GPIO_PIN_LED;
 				msleep(1000);
 				gpio_base[10] = 1 << GPIO_PIN_LED;
-				c = 'C';
+				msleep(1000);
 			}
-			break;
-		case 'B':
-			for(i = 0; i < 10; i++){
-				gpio_base[7] = 1 << GPIO_PIN_LED;
-				msleep(200);
-				gpio_base[10] = 1 << GPIO_PIN_LED;
-				msleep(200);
-			}
-			c = 'C';
-			break;
-		case 'C':
-			gpio_base[10] = 1 << GPIO_PIN_LED;
 			break;
 	}
 	return 1;
@@ -92,8 +89,10 @@ static ssize_t led_write(struct file *filp, const char *buf, size_t count, loff_
 
 static ssize_t led_read(struct file *filp, char __user *buf, size_t count, loff_t *pos){
 	printk("led_read");
-	int val = gpio_get_value(GPIO_PIN_BTN);
-	put_user(val + '0', &buf[0]);
+//	int val = gpio_get_value(GPIO_PIN_LED);
+//	put_user(val + '0', &buf[0]);
+	int val1 = gpio_get_value(GPIO_PIN_LED);
+	put_user(val1 + '0', &buf[0]);
 	return count;
 }
 
