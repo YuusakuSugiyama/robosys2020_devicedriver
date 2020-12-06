@@ -7,7 +7,7 @@
 
 # 内容
 
-講義内で作成した[デバイスドライバ](https://github.com/ryuichiueda/robosys_device_drivers/blob/master/myled.c)を編集し作成。
+講義内で作成した[デバイスドライバ](https://github.com/ryuichiueda/robosys_device_drivers/blob/master/myled.c)を編集し作成。  
 ・スイッチをONにしてAを入力した場合、LEDが徐々に細かく点滅し、最後に大きく点灯し終了する。  
 ・スイッチをOFFにしてAを入力した場合、5回点滅し終了する。  
 ・Bを入力した場合、スイッチの入力にかかわらず10回点滅し終了する。  
