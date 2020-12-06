@@ -83,7 +83,7 @@ $ dmesg
 
 # デモ動画
 
-youtubeにあげたデモ動画は[こちら]()。
+youtubeにあげたデモ動画は[こちら](https://youtu.be/zEzk37fNaZQ)。
 
 ---
 
