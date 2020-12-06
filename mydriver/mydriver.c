@@ -2,6 +2,7 @@
 #include <linux/delay.h>
 #include <linux/device.h>
 #include <linux/fs.h>
+#include <linux/gpio.h>
 #include <linux/init.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
@@ -9,9 +10,9 @@
 #include <linux/module.h>
 #include <linux/types.h>
 #include <linux/uaccess.h>
-#include <asm/current.h>
-#include <asm/uaccess.h>
-#include <asm/io.h>
+//#include <asm/current.h>
+//#include <asm/uaccess.h>
+//#include <asm/io.h>
 
 MODULE_AUTHOR("Ryuichi Ueda and Jitsukawa Hikaru");
 MODULE_DESCRIPTION("driver control");
@@ -33,35 +34,43 @@ static int gpio[num] = {24,25};
 
 static int mydriver_open(struct inode *inode, struct file *file){
 	printk("mydriver_open");
-	gpio_base[7] = 1 << gpio[0];
+//	gpio_base[7] = 1 << gpio[0];
 	return 0;
 }
 
 static int mydriver_close(struct inode *inode, struct file *file){
 	printk("mydriver_close");
-	gpio_base[10] = 1 << gpio[0];
+//	gpio_base[10] = 1 << gpio[0];
 	return 0;
 }
 
 static ssize_t led_write(struct file *filp, const char *buf, size_t count, loff_t *pos){
 	char c;
+	int btn;
+	printk("led_write");
 	if(copy_from_user(&c, buf, sizeof(char)))
 		return -EFAULT;
-
+	printk(KERN_INFO "receive %c\n", c);
 	if(c == '0'){
-		gpio_base[7] = 1 << gpio[0];
-	}
+//		gpio_base[7] = 1 << gpio[0];
+		gpio_direction_output(gpio[0],1);
+		gpio_set_value(gpio[0],1);
+		gpio_set_value(gpio[1],0);
+}
 	else if(c == '1'){
-		gpio_base[7] = 1 << gpio[1];
+//		gpio_base[7] = 1 << gpio[1];
+		gpio_direction_input(gpio[1]);
+		btn = gpio_get_value(gpio[1]);
+		printk("button = %d\n", btn);
 	}
 	else if(c == '2'){
-		gpio_base[10] = 1 << gpio[0];
-		gpio_base[10] = 1 << gpio[1];
+//		gpio_base[10] = 1 << gpio[0];
+//		gpio_base[10] = 1 << gpio[1];
 	}
 	else if(c == '3'){
-		gpio_base[7] = 1 << gpio[1];
-		msleep(100);
-		gpio_base[10] = 1 << gpio[1];
+//		gpio_base[7] = 1 << gpio[1];
+//		msleep(100);
+//		gpio_base[10] = 1 << gpio[1];
 	}
 	return 1;
 }
