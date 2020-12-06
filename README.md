@@ -17,10 +17,10 @@
 
 # 環境・道具
 
-### 環境
+#### 環境
 ・Raspberry Pi 4 Model B  
 ・Ubuntu 20.04.1 LTS  
-### 道具
+#### 道具
 ・ブレッドボード  
 ・LED(緑)  
 ・抵抗 1KΩ  
@@ -32,7 +32,7 @@
 
 # ビルド
 
-実行方法
+#### 実行方法
 ```sh
 $ git clone https://github.com/zjzj-zz/robosys2020_devicedriver
 $ cd robosys2020_devicedriver/myDeviceDriver
@@ -40,24 +40,27 @@ $ make
 $ sudo insmod mydriver.ko
 $ sudo chmod 666 /dev/mydriver0
 ```
+#### 回路
+gpio23と3.3Vの間にマイクロスイッチ  
+gpio24とGNDの間に抵抗とLED  
 
 ---
 
 # 実行
 
-### スイッチによるモード変更
+#### スイッチによるモード変更
 
 ```sh
 $ echo A > /dev/mydriver0
 ```
 
-### 通常の点滅
+#### 通常の点滅
 
 ```sh
 $ echo B > /dev/mydriver0
 ```
 
-### スイッチの状態確認
+#### スイッチの状態確認
 
 ```sh
 $ cat /dev/mydriver0
@@ -71,7 +74,7 @@ $ cat /dev/mydriver0
 $ sudo rmmod mydriver
 $ make clean
 ```
-### ログの確認
+#### ログの確認
 ```sh
 $ dmesg
 ```
