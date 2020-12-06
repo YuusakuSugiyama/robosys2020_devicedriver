@@ -71,6 +71,10 @@ $ cat /dev/mydriver0
 $ sudo rmmod mydriver
 $ make clean
 ```
+### ログの確認
+```sh
+$ dmesg
+```
 
 ---
 
