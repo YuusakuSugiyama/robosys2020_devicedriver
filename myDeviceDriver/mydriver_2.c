@@ -54,7 +54,6 @@ static int mydriver_close(struct inode *inode, struct file *file){
 static ssize_t led_write(struct file *filp, const char *buf, size_t count, loff_t *pos){
 	char c;
 	int btn;
-	char outValue;
 	printk("led_write");
 	if(copy_from_user(&c, buf, sizeof(char)))
 		return -EFAULT;
@@ -63,19 +62,12 @@ static ssize_t led_write(struct file *filp, const char *buf, size_t count, loff_
 		case 'A':
 			gpio_direction_input(GPIO_PIN_BTN);
 			btn = gpio_get_value(GPIO_PIN_BTN);
-			printk("button = %d\n", btn);
-//			if(btn == 0) gpio_set_value(GPIO_PIN_LED, 0);
-			if(btn == 0) gpio_base[10] = 1 << GPIO_PIN_LED;
-			else gpio_set_value(GPIO_PIN_LED, 1);
+			printk("button = %d", btn);
+			if(btn = 0) gpio_base[10] = 1 << GPIO_PIN_LED;
+			else gpio_base[7] = 1 << GPIO_PIN_LED;
 break;
 		case 'B':
-//			gpio_set_value(GPIO_PIN_LED, 0);
-			get_user(outValue, &buf[0]);
-			if(outValue == '1'){
-				gpio_base[7] = 1 << GPIO_PIN_LED;
-			} else {
-				gpio_base[10] = 1 << GPIO_PIN_LED;
-			}
+			gpio_set_value(GPIO_PIN_LED, 0);
 			break;
 	}
 	return 1;
@@ -83,10 +75,8 @@ break;
 
 static ssize_t led_read(struct file *filp, char __user *buf, size_t count, loff_t *pos){
 	printk("led_read");
-//	int val = gpio_get_value(GPIO_PIN_LED);
-//	put_user(val + '0', &buf[0]);
-	int val1 = gpio_get_value(GPIO_PIN_LED);
-	put_user(val1 + '0', &buf[0]);
+	int val = gpio_get_value(GPIO_PIN_LED);
+	put_user(val + '0', &buf[0]);
 	return count;
 }
 
