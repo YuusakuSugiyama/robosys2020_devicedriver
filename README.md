@@ -80,5 +80,9 @@ youtubeにあげたデモ動画は[こちら]()。
 
 ---
 
+# 著者
+
+[Hikaru Jitsukawa](https://github.com/zjzj-zz)
+ベースのプログラム開発者：[Ryuichi Ueda](https://github.com/ryuichiueda)
 # ライセンス
 GNU Geberal Public License v3.0
