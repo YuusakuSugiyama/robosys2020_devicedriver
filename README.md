@@ -65,6 +65,15 @@ $ cat /dev/mydriver0
 
 ---
 
+# 終了
+
+```sh
+$ sudo rmmod mydriver
+$ make clean
+```
+
+---
+
 # デモ動画
 
 youtubeにあげたデモ動画は[こちら]()。
