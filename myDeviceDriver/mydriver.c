@@ -1,4 +1,4 @@
-// SPDX-License-Identifer: GPL-2.0
+// SPDX-License-Identifer: GPL-3.0
 /*
  * Copyright (C) 2020 Hikaru Jitsukawa. All rights reserved.
  */
